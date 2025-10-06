@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: ai-platform
-        image: ai-platform:latest
+        image: anuragaksregistry.azurecr.io/ai-future
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 80

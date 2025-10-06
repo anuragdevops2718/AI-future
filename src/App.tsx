@@ -46,11 +46,11 @@ function App() {
         <nav className="border-b border-white/10 backdrop-blur-xl bg-slate-900/50">
           <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500 to-violet-600 flex items-center justify-center">
-                <Layers className="w-6 h-6" />
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500 to-violet-600 flex items-center justify-center font-bold text-lg">
+                A
               </div>
               <div>
-                <h1 className="text-xl font-bold bg-gradient-to-r from-cyan-400 to-violet-400 bg-clip-text text-transparent">AR Vision AI</h1>
+                <h1 className="text-xl font-bold bg-gradient-to-r from-cyan-400 to-violet-400 bg-clip-text text-transparent">Anurag AIOps</h1>
                 <p className="text-xs text-slate-400">Augmented Reality Platform</p>
               </div>
             </div>
@@ -193,12 +193,12 @@ function App() {
           <div className="max-w-7xl mx-auto px-6 py-8">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-500 to-violet-600 flex items-center justify-center">
-                  <Layers className="w-5 h-5" />
+                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-500 to-violet-600 flex items-center justify-center font-bold text-sm">
+                  A
                 </div>
-                <span className="font-semibold">AR Vision AI</span>
+                <span className="font-semibold">Anurag AIOps</span>
               </div>
-              <p className="text-sm text-slate-400">© 2025 AR Vision AI. All rights reserved.</p>
+              <p className="text-sm text-slate-400">© 2025 Anurag AIOps. All rights reserved.</p>
             </div>
           </div>
         </footer>

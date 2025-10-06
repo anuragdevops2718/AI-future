@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ai-platform
+  name: ai-platform-op
   labels:
     app: ai-platform
 spec:
@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: ai-platform
-        image: aiacrap.azurecr.io/ai-future
+        image: aiacrap.azurecr.io/ai-future-op
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 80

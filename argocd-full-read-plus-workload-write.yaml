@@ -1,0 +1,65 @@
+# 1) Broad read-only for ArgoCD (covers all apiGroups/resources, read-only)
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: argocd-broad-read-only
+rules:
+  - apiGroups: ["*"]
+    resources: ["*"]
+    verbs: ["get", "list", "watch"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: argocd-broad-read-only-binding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: argocd-broad-read-only
+subjects:
+  - kind: ServiceAccount
+    name: argocd-application-controller
+    namespace: argocd-aiops   # <-- change if different
+---
+# 2) Workload write role (same as earlier) - needed so ArgoCD can create/update resources
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: argocd-workload-manager
+rules:
+  - apiGroups: ["", "apps", "batch"]
+    resources:
+      - pods
+      - pods/exec
+      - deployments
+      - replicasets
+      - statefulsets
+      - daemonsets
+      - services
+      - configmaps
+      - secrets
+      - persistentvolumeclaims
+      - jobs
+    verbs:
+      - get
+      - list
+      - watch
+      - create
+      - update
+      - patch
+      - delete
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: argocd-workload-manager-binding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: argocd-workload-manager
+subjects:
+  - kind: ServiceAccount
+    name: argocd-application-controller
+    namespace: argocd-aiops

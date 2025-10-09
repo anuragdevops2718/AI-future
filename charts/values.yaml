@@ -1,0 +1,42 @@
+replicaCount: 3
+
+image:
+  repository: aiacrap.azurecr.io/ai-future-op
+  tag: "latest"
+  pullPolicy: IfNotPresent
+
+service:
+  type: LoadBalancer
+  port: 80
+
+resources:
+  requests:
+    memory: "64Mi"
+    cpu: "100m"
+  limits:
+    memory: "128Mi"
+    cpu: "200m"
+
+imagePullSecrets: []
+
+livenessProbe:
+  httpGet:
+    path: /
+    port: 80
+  initialDelaySeconds: 30
+  periodSeconds: 10
+
+readinessProbe:
+  httpGet:
+    path: /
+    port: 80
+  initialDelaySeconds: 5
+  periodSeconds: 5
+
+env: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

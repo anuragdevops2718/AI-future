@@ -52,14 +52,18 @@ variable "kv_config" {
 }
 
 variable "sql_config" {
-  type = map(object({
+type = map(object({
     server_name            = string
     database_name          = string
     resource_group_name    = string
     location               = string
     administrator_login    = string
     administrator_password = string
-    service_objective_name = string
-    tags                   = map(string)
+    sku_name               = optional(string, "S0")
+    max_size_gb            = optional(number, 2)
+    license_type           = optional(string, "LicenseIncluded")
+    collation              = optional(string, "SQL_Latin1_General_CP1_CI_AS")
+    tags                   = optional(map(string), {})
   }))
+
 }

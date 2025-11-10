@@ -51,7 +51,9 @@ sql_config = {
     location               = "eastus"
     administrator_login    = "sqladmin"
     administrator_password = "StrongP@ssword123!"
-    service_objective_name = "S0"
+    sku_name               = "S0"
+    max_size_gb            = 2
     tags = { env = "dev" }
   }
 }
+

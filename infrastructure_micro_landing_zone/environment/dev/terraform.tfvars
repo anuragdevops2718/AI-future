@@ -24,34 +24,13 @@ aks_config = {
     resource_group_name = "rg-ai-dev"
     dns_prefix          = "aksai"
     admin_username      = "azureuser"
-    admin_password      = "StrongP@ssword123!"
     node_count          = 2
     vm_size             = "Standard_B2s"
     network_plugin      = "azure"
     load_balancer_sku   = "standard"
-    tags = {
-      env = "dev"
-    }
-  }
-
-  prod = {
-    name                = "aks-ai-prod"
-    location            = "eastus"
-    resource_group_name = "rg-ai-prod"
-    dns_prefix          = "aksai-prod"
-    admin_username      = "azureuser"
-    admin_password      = "StrongP@ssword123!"
-    node_count          = 3
-    vm_size             = "Standard_B4ms"
-    network_plugin      = "azure"
-    load_balancer_sku   = "standard"
-    tags = {
-      env = "prod"
-    }
+    tags = { env = "dev" }
   }
 }
-
-
 
 sql_config = {
   sql1 = {

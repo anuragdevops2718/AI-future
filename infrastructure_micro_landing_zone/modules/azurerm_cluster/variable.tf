@@ -5,7 +5,6 @@ variable "aks_config" {
     resource_group_name = string
     dns_prefix          = string
     admin_username      = string
-    admin_password      = string
     node_count          = optional(number, 1)
     vm_size             = optional(string, "Standard_B2s")
     os_disk_size_gb     = optional(number, 30)

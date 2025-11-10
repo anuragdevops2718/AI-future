@@ -1,3 +1,10 @@
+# SSH key generate karne ke liye Terraform resource
+resource "tls_private_key" "aks_ssh" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
+}
+
+
 resource "azurerm_kubernetes_cluster" "this" {
   for_each = var.aks_config
 

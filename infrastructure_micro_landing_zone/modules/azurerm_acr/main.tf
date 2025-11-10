@@ -8,3 +8,6 @@ resource "azurerm_container_registry" "demoacr" {
   admin_enabled       = each.value.admin_enabled
   tags = each.value.tags
 }
+
+
+

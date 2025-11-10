@@ -77,5 +77,5 @@ jobs:
       - name: Terraform Apply (only on main branch)
         if: github.ref == 'refs/heads/main'
         working-directory: ./infrastructure_micro_landing_zone/environment/dev
-        run: terraform apply -input=false -auto-approve tfplan
+        run: terraform apply -auto-approve
 

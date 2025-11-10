@@ -18,30 +18,40 @@ acr_config = {
 }
 
 aks_config = {
-  cluster1 = {
+  dev = {
     name                = "aks-ai-dev"
-    resource_group_name = "rg-ai-dev"
     location            = "eastus"
-    dns_prefix          = "aidns"
-    kubernetes_version  = "1.29.0"
+    resource_group_name = "rg-ai-dev"
+    dns_prefix          = "aksai"
+    admin_username      = "azureuser"
+    admin_password      = "StrongP@ssword123!"
     node_count          = 2
-    node_vm_size        = "Standard_DS2_v2"
-    ssh_public_key_path = "~/.ssh/id_rsa.pub"
-    tags                = { env = "dev" }
+    vm_size             = "Standard_B2s"
+    network_plugin      = "azure"
+    load_balancer_sku   = "standard"
+    tags = {
+      env = "dev"
+    }
+  }
+
+  prod = {
+    name                = "aks-ai-prod"
+    location            = "eastus"
+    resource_group_name = "rg-ai-prod"
+    dns_prefix          = "aksai-prod"
+    admin_username      = "azureuser"
+    admin_password      = "StrongP@ssword123!"
+    node_count          = 3
+    vm_size             = "Standard_B4ms"
+    network_plugin      = "azure"
+    load_balancer_sku   = "standard"
+    tags = {
+      env = "prod"
+    }
   }
 }
 
-kv_config = {
-  kv1 = {
-    name                     = "kv-ai-dev"
-    resource_group_name       = "rg-ai-dev"
-    location                 = "eastus"
-    sku_name                 = "standard"
-    purge_protection_enabled = false
-    access_policies          = []
-    tags = { env = "dev" }
-  }
-}
+
 
 sql_config = {
   sql1 = {

@@ -1,4 +1,4 @@
-resource "azurerm_sql_server" "this" {
+resource "azurerm_mssql_server" "this" {
   for_each = var.sql_config
 
   name                         = each.value.server_name
@@ -10,12 +10,16 @@ resource "azurerm_sql_server" "this" {
   tags                         = each.value.tags
 }
 
-resource "azurerm_sql_database" "this" {
-  for_each = var.sql_config
+resource "azurerm_mssql_database" "that" {
+name         = "example-db"
+  server_id    = azurerm_mssql_server.this[each.key].id
+  collation    = "SQL_Latin1_General_CP1_CI_AS"
+  license_type = "LicenseIncluded"
+  max_size_gb  = 2
+  sku_name     = "S0"
+  enclave_type = "VBS"
 
-  name                = each.value.database_name
-  resource_group_name = each.value.resource_group_name
-  location            = each.value.location
-  server_name         = azurerm_sql_server.this[each.key].name
-  requested_service_objective_name = each.value.service_objective_name
+  tags = {
+    foo = "bar"
+  }
 }

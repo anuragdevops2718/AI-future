@@ -36,7 +36,6 @@ kv_config = {
     name                     = "kv-ai-dev"
     resource_group_name       = "rg-ai-dev"
     location                 = "eastus"
-    tenant_id                = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
     sku_name                 = "standard"
     purge_protection_enabled = false
     access_policies          = []

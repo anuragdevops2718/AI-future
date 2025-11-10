@@ -62,6 +62,7 @@ type = map(object({
     sku_name               = optional(string, "S0")
     max_size_gb            = optional(number, 2)
     license_type           = optional(string, "LicenseIncluded")
+    service_objective_name = optional(string, "S0")
     collation              = optional(string, "SQL_Latin1_General_CP1_CI_AS")
     tags                   = optional(map(string), {})
   }))

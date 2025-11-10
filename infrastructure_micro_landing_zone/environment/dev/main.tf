@@ -21,11 +21,7 @@ module "aks" {
   aks_config  = var.aks_config
 }
 
-module "kv" {
-    depends_on = [ module.aks ]
-  source      = "../../modules/azurerm_key_vault"
-  kv_config   = var.kv_config
-}
+
 
 module "sql" {
   depends_on = [ module.aks ]

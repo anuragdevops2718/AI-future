@@ -1,4 +1,11 @@
-resource "azurerm_kubernetes_cluster" "democluster" {
+# SSH key generate karne ke liye Terraform resource
+resource "tls_private_key" "aks_ssh" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
+}
+
+
+resource "azurerm_kubernetes_cluster" "this" {
   for_each = var.aks_config
 
   name                = each.value.name
@@ -7,28 +14,28 @@ resource "azurerm_kubernetes_cluster" "democluster" {
   dns_prefix          = each.value.dns_prefix
 
   default_node_pool {
-    name       = "system"
-    node_count = each.value.node_count
-    vm_size    = each.value.node_vm_size
+    name       = lookup(each.value, "node_pool_name", "systempool")
+    vm_size    = lookup(each.value, "vm_size", "Standard_B2s")
+    node_count = lookup(each.value, "node_count", 1)
   }
 
   linux_profile {
-    admin_username = "azureuser"
-    ssh_key {
-      key_data = file(each.value.ssh_public_key_path)
+    admin_username = each.value.admin_username
+
+      ssh_key {
+      # 👇 Auto-generate SSH key using Terraform
+      key_data = tls_private_key.aks_ssh.public_key_openssh
     }
   }
 
   identity {
-    type = "SystemAssigned"
+    type = lookup(each.value, "identity_type", "SystemAssigned")
   }
-
-  kubernetes_version = each.value.kubernetes_version
 
   network_profile {
-    network_plugin    = "azure"
-    load_balancer_sku = "standard"
+    network_plugin    = lookup(each.value, "network_plugin", "azure")
+    load_balancer_sku = lookup(each.value, "load_balancer_sku", "standard")
   }
 
-  tags = each.value.tags
+  tags = lookup(each.value, "tags", {})
 }

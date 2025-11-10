@@ -19,47 +19,39 @@ variable "acr_config" {
 }
 
 variable "aks_config" {
-  type = map(object({
+   type = map(object({
     name                = string
-    resource_group_name = string
     location            = string
+    resource_group_name = string
     dns_prefix          = string
-    kubernetes_version  = string
-    node_count          = number
-    node_vm_size        = string
-    ssh_public_key_path = string
-    tags                = map(string)
+    admin_username      = string
+    node_count          = optional(number, 1)
+    vm_size             = optional(string, "Standard_B2s")
+    os_disk_size_gb     = optional(number, 30)
+    enable_auto_scaling = optional(bool, false)
+    identity_type       = optional(string, "SystemAssigned")
+    network_plugin      = optional(string, "azure")
+    load_balancer_sku   = optional(string, "standard")
+    node_pool_name      = optional(string, "systempool")
+    tags                = optional(map(string), {})
   }))
 }
 
-variable "kv_config" {
-  type = map(object({
-    name                     = string
-    resource_group_name       = string
-    location                 = string
-    tenant_id                = string
-    sku_name                 = string
-    purge_protection_enabled = bool
-    access_policies          = optional(list(object({
-      tenant_id               = string
-      object_id               = string
-      secret_permissions      = optional(list(string), [])
-      key_permissions         = optional(list(string), [])
-      certificate_permissions = optional(list(string), [])
-    })), [])
-    tags = map(string)
-  }))
-}
 
 variable "sql_config" {
-  type = map(object({
+type = map(object({
     server_name            = string
     database_name          = string
     resource_group_name    = string
     location               = string
     administrator_login    = string
     administrator_password = string
-    service_objective_name = string
-    tags                   = map(string)
+    sku_name               = optional(string, "S0")
+    max_size_gb            = optional(number, 2)
+    license_type           = optional(string, "LicenseIncluded")
+    service_objective_name = optional(string, "S0")
+    collation              = optional(string, "SQL_Latin1_General_CP1_CI_AS")
+    tags                   = optional(map(string), {})
   }))
+
 }

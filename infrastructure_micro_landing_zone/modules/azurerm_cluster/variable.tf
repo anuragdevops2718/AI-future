@@ -1,14 +1,18 @@
 variable "aks_config" {
-  description = "Configuration for AKS Cluster(s)"
-  type = map(object({
+   type = map(object({
     name                = string
-    resource_group_name = string
     location            = string
+    resource_group_name = string
     dns_prefix          = string
-    kubernetes_version  = string
-    node_count          = number
-    node_vm_size        = string
-    ssh_public_key_path = string
-    tags                = map(string)
+    admin_username      = string
+    node_count          = optional(number, 1)
+    vm_size             = optional(string, "Standard_B2s")
+    os_disk_size_gb     = optional(number, 30)
+    enable_auto_scaling = optional(bool, false)
+    identity_type       = optional(string, "SystemAssigned")
+    network_plugin      = optional(string, "azure")
+    load_balancer_sku   = optional(string, "standard")
+    node_pool_name      = optional(string, "systempool")
+    tags                = optional(map(string), {})
   }))
 }

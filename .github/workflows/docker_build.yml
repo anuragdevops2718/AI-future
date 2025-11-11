@@ -2,10 +2,8 @@ name: Build & Push Images
 
 on:
   push:
-    branches: [ 'features/*' ]
-    paths:
-      - 'frontend-ui/**'
-      - 'backend/**'
+    branches:
+    - 'features/build'
   workflow_dispatch:
 
 permissions:

@@ -25,7 +25,7 @@ aks_config = {
     dns_prefix          = "aksai"
     admin_username      = "azureuser"
     node_count          = 2
-    vm_size             = "Standard_B2s"
+    vm_size             = "Standard_L2aos_v4"
     network_plugin      = "azure"
     load_balancer_sku   = "standard"
     tags = { env = "dev" }

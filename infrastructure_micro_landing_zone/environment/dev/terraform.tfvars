@@ -1,7 +1,7 @@
 rg_config = {
   rg1 = {
     name     = "devrgai11"
-    location = "southbrazil"
+    location = "brazilsouth"
     tags     = { env = "dev", owner = "anurag" }
   }
 }
@@ -12,7 +12,7 @@ acr_config = {
     sku                 = "Standard"
     admin_enabled       = false
     resource_group_name = "devrgai11"
-    location            = "southbrazil"
+    location            = "brazilsouth"
     tags                = { env = "dev" }
   }
 }
@@ -20,7 +20,7 @@ acr_config = {
 aks_config = {
   dev = {
     name                = "devaksai11"
-    location            = "southbrazil"
+    location            = "brazilsouth"
     resource_group_name = "devrgai11"
     dns_prefix          = "aksai"
     admin_username      = "azureuser"
@@ -37,7 +37,7 @@ sql_config = {
     server_name            = "devsqlserverai11"
     database_name          = "devsqldbai11"
     resource_group_name    = "devrgai11"
-    location               = "southbrazil"
+    location               = "brazilsouth"
     administrator_login    = "sqladmin"
     administrator_password = "StrongP@ssword123!"
     sku_name               = "S0"

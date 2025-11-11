@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ai-platform-service
+  labels:
+    app: ai-platform
+spec:
+  type: LoadBalancer
+  selector:
+    app: ai-platform
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80

@@ -15,7 +15,7 @@ resource "azurerm_kubernetes_cluster" "this" {
 
   default_node_pool {
     name       = lookup(each.value, "node_pool_name", "systempool")
-    vm_size    = lookup(each.value, "vm_size", "Standard_B2ms")
+    vm_size    = lookup(each.value, "vm_size", "Standard_L2aos_v4")
     node_count = lookup(each.value, "node_count", 1)
   }
 

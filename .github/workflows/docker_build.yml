@@ -42,10 +42,10 @@ jobs:
       # ---------- FRONTEND ----------
       - name: Build and Push Frontend Image
         run: |
-          docker build -t $REGISTRY_NAME.azurecr.io/$FRONTEND_IMAGE:$TAG ./frontend
+          docker build -t $REGISTRY_NAME.azurecr.io/$FRONTEND_IMAGE:$TAG ./frontend-ui
           docker push $REGISTRY_NAME.azurecr.io/$FRONTEND_IMAGE:$TAG
 
-      # ---------- BACKEND_1----------
+      # --------- BACKEND_1----------
       - name: Build and Push Backend_1 Image
         run: |
           docker build -t $REGISTRY_NAME.azurecr.io/$BACKEND1_IMAGE:$TAG ./backend/add-task

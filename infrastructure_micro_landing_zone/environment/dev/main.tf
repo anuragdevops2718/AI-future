@@ -1,7 +1,3 @@
-provider "azurerm" {
-  features {}
-}
-
 # Data for tenant_id (used in Key Vault)
 data "azurerm_client_config" "current" {}
 
@@ -17,6 +13,7 @@ module "acr" {
 }
 
 module "aks" {
+    depends_on = [ module.rg ]
   source      = "../../modules/azurerm_cluster"
   aks_config  = var.aks_config
 }

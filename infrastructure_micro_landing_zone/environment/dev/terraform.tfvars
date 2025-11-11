@@ -1,27 +1,27 @@
 rg_config = {
   rg1 = {
-    name     = "rg-ai-dev"
-    location = "eastus"
+    name     = "devrgai11"
+    location = "brazilsouth"
     tags     = { env = "dev", owner = "anurag" }
   }
 }
 
 acr_config = {
   acr1 = {
-    name                = "acraidev"
+    name                = "devacrai11"
     sku                 = "Standard"
     admin_enabled       = false
-    resource_group_name = "rg-ai-dev"
-    location            = "eastus"
+    resource_group_name = "devrgai11"
+    location            = "brazilsouth"
     tags                = { env = "dev" }
   }
 }
 
 aks_config = {
   dev = {
-    name                = "aks-ai-dev"
-    location            = "eastus"
-    resource_group_name = "rg-ai-dev"
+    name                = "devaksai11"
+    location            = "brazilsouth"
+    resource_group_name = "devrgai11"
     dns_prefix          = "aksai"
     admin_username      = "azureuser"
     node_count          = 2
@@ -34,10 +34,10 @@ aks_config = {
 
 sql_config = {
   sql1 = {
-    server_name            = "sqlai-dev"
-    database_name          = "aidevdb"
-    resource_group_name    = "rg-ai-dev"
-    location               = "eastus"
+    server_name            = "devsqlserverai11"
+    database_name          = "devsqldbai11"
+    resource_group_name    = "devrgai11"
+    location               = "brazilsouth"
     administrator_login    = "sqladmin"
     administrator_password = "StrongP@ssword123!"
     sku_name               = "S0"

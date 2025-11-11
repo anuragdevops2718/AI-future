@@ -22,6 +22,7 @@ jobs:
     env:
       TF_IN_AUTOMATION: "true"
       TF_VAR_sql_admin_password: ${{ secrets.TF_SQL_ADMIN_PASSWORD }}
+      ARM_USE_OIDC: "true"
 
     steps:
       - name: Checkout Repository

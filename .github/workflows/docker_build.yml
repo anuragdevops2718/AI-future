@@ -20,7 +20,7 @@ jobs:
       BACKEND1_IMAGE: backend_add
       BACKEND2_IMAGE: backend_get
       ARM_USE_OIDC: "true"
-      TAG: latest
+      TAG: ${{ github.sha }}
 
     steps:
       - name: Checkout Repository

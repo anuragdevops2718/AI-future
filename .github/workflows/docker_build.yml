@@ -47,10 +47,10 @@ jobs:
       - name: Build and Push Backend_1 Image
         run: |
           docker build -t $REGISTRY_NAME.azurecr.io/$BACKEND1_IMAGE:$TAG ./backend/add-task
-          docker push $REGISTRY_NAME.azurecr.io/$BACKEND_IMAGE:$TAG
+          docker push $REGISTRY_NAME.azurecr.io/$BACKEND1_IMAGE:$TAG
 
       # ---------- BACKEND_2 ----------
       - name: Build and Push Backend_2 Image
         run: |
           docker build -t $REGISTRY_NAME.azurecr.io/$BACKEND2_IMAGE:$TAG ./backend/get-task
-          docker push $REGISTRY_NAME.azurecr.io/$WORKER_IMAGE:$TAG
+          docker push $REGISTRY_NAME.azurecr.io/$BACKEND2_IMAGE:$TAG

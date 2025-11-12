@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: frontend
+  name: frontend-ai
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: ai-frontend
+      app: frontend-ai
   template:
     metadata:
       labels:
-        app: ai-frontend
+        app: frontend-ai
     spec:
       containers:
         - name: ai-frontend
-          image: devacrai.azurecr.io/frontend:latest
+          image: devacrai11.azurecr.io/frontend:b6072477263b94c77c2a70e58d378202b345f4ad
           imagePullPolicy: Always
           ports:
-            - containerPort: 80
+            - container

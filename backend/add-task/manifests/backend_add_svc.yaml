@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-add-svc-ai
+spec:
+  selector:
+    app: backend-add-ai
+  ports:
+    - port: 9020
+      targetPort: 5001
+  type: LoadBalancer

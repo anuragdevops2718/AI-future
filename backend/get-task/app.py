@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
-import os
+import os 
 from supabase import create_client, Client
 
 app = Flask(__name__)

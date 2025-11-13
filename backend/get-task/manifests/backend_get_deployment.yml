@@ -14,10 +14,8 @@ spec:
     spec:
       containers:
         - name: backend-get-ai
-          image: devacrai11.azurecr.io/backend_get:fa164dc4285e7be1cdb7d1afd1f5b94f635eedac
+          image: devacrai11.azurecr.io/backend_get:a0eb6335ef556ab77f6c53e6e48fc7b597639ba3
           imagePullPolicy: Always
           ports:
-            - containerPort: 5002
-          envFrom:
-          - secretRef:
-              name: supabase-secret
+            - containerPort: 5000
+          

@@ -58,6 +58,5 @@ variable "mssql_config" {
     max_size_gb    = optional(number, 250)
     read_scale     = optional(bool, true)
     sku_name       = optional(string, "S0")
-    zone_redundant = optional(bool, true)
   }))
 }

@@ -10,16 +10,16 @@ variable "acr_config" {
   type = map(object({
     name                     = string
     sku                      = string
-    admin_enabled             = bool
-    georeplication_locations  = optional(list(string), [])
-    resource_group_name       = string
-    location                  = string
-    tags                      = map(string)
+    admin_enabled            = bool
+    georeplication_locations = optional(list(string), [])
+    resource_group_name      = string
+    location                 = string
+    tags                     = map(string)
   }))
 }
 
 variable "aks_config" {
-   type = map(object({
+  type = map(object({
     name                = string
     location            = string
     resource_group_name = string
@@ -38,20 +38,26 @@ variable "aks_config" {
 }
 
 
-variable "sql_config" {
-type = map(object({
-    server_name            = string
-    database_name          = string
-    resource_group_name    = string
-    location               = string
-    administrator_login    = string
-    administrator_password = string
-    sku_name               = optional(string, "S0")
-    max_size_gb            = optional(number, 2)
-    license_type           = optional(string, "LicenseIncluded")
-    service_objective_name = optional(string, "S0")
-    collation              = optional(string, "SQL_Latin1_General_CP1_CI_AS")
-    tags                   = optional(map(string), {})
+variable "mssql_config" {
+  type = map(object({
+    servername                    = string
+    resource_group_name           = string
+    location                      = string
+    minimum_tls_version           = optional(number, 1.2)
+    public_network_access_enabled = optional(bool, true)
+    administrator_login           = optional(string)
+    administrator_login_password  = optional(string)
+    azuread_administrator = optional(map(object({
+      login_username = string
+      object_id      = string
+      tenant_id      = string
+    })))
+    tags           = optional(map(string), {})
+    dbname         = string
+    license_type   = optional(string, "LicenseIncluded")
+    max_size_gb    = optional(number, 4)
+    read_scale     = optional(bool, true)
+    sku_name       = optional(string, "S0")
+    zone_redundant = optional(bool, true)
   }))
-
 }

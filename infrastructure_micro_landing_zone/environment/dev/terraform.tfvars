@@ -32,17 +32,15 @@ aks_config = {
   }
 }
 
-sql_config = {
+mssql_config = {
   sql1 = {
-    server_name            = "devsqlserverai11"
-    database_name          = "devsqldbai11"
-    resource_group_name    = "devrgai11"
-    location               = "brazilsouth"
-    administrator_login    = "sqladmin"
-    administrator_password = "StrongP@ssword123!"
-    sku_name               = "S0"
-    max_size_gb            = 2
-    tags = { env = "dev" }
+    servername = "aifuturesqlserver1411"
+    resource_group_name = "devrgai11"
+    location = "brazilsouth"
+    dbname = "aifuturesqldb1411"
+    tags = {
+      "env" = "dev"
+    }
   }
 }
 

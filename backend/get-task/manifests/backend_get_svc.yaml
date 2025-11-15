@@ -7,5 +7,5 @@ spec:
     app: backend-get-ai
   ports:
     - port: 9010
-      targetPort: 5002
+      targetPort: 5000
   type: LoadBalancer

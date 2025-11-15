@@ -56,7 +56,7 @@ variable "mssql_config" {
     dbname         = string
     license_type   = optional(string, "LicenseIncluded")
     max_size_gb    = optional(number, 250)
-    read_scale     = optional(bool, true)
+    read_scale     = optional(bool, false)
     sku_name       = optional(string, "S0")
   }))
 }

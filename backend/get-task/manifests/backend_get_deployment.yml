@@ -14,10 +14,13 @@ spec:
     spec:
       containers:
         - name: backend-get-ai
-          image: devacrai11.azurecr.io/backend_get:f3e813120311adc1fa4b97b53469205a3a9c7943
+          image: devacrai11.azurecr.io/backend_get:5a3d744a161eb952413b3009f3616d8fd5ce6797
           imagePullPolicy: Always
           ports: 
             - containerPort: 5000
           envFrom:
             - secretRef:
-                name: azure-sql-secret
+                name: sql-conn-secret
+          env:
+            - name: SERVICE_NAME
+              value: "tasks"

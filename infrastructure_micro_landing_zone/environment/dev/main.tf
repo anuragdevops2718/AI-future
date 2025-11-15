@@ -21,5 +21,5 @@ module "aks" {
 module "sql" {
   depends_on = [ module.aks ]
   source      = "../../modules/azurerm_sql_server_db"
-  sql_config  = var.sql_config
+  mssql_config  = var.mssql_config
 }

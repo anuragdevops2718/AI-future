@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-get-svc-ai
+spec:
+  selector:
+    app: backend-get-ai
+  ports:
+    - port: 9010
+      targetPort: 5000
+  type: LoadBalancer

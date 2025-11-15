@@ -1,0 +1,56 @@
+name: Build & Push Images
+
+on:
+  push:
+    branches:
+    - 'features/build'
+  workflow_dispatch:
+
+permissions:
+  id-token: write   # required for OIDC
+  contents: read
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    env:
+      REGISTRY_NAME: ${{ secrets.ACR_NAME }}
+      FRONTEND_IMAGE: frontend
+      BACKEND1_IMAGE: backend_add
+      BACKEND2_IMAGE: backend_get
+      ARM_USE_OIDC: "true"
+      TAG: ${{ github.sha }}
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Azure Login (OIDC)
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Azure Container Registry Login
+        run: |
+          az acr login --name $REGISTRY_NAME
+
+      # ---------- FRONTEND ----------
+      - name: Build and Push Frontend Image
+        run: |
+          docker build -t $REGISTRY_NAME.azurecr.io/$FRONTEND_IMAGE:$TAG ./frontend-ui
+          docker push $REGISTRY_NAME.azurecr.io/$FRONTEND_IMAGE:$TAG
+
+      # --------- BACKEND_1----------
+      - name: Build and Push Backend_1 Image
+        run: |
+          docker build -t $REGISTRY_NAME.azurecr.io/$BACKEND1_IMAGE:$TAG ./backend/add-task
+          docker push $REGISTRY_NAME.azurecr.io/$BACKEND1_IMAGE:$TAG
+
+      # ---------- BACKEND_2 ----------
+      - name: Build and Push Backend_2 Image
+        run: |
+          docker build -t $REGISTRY_NAME.azurecr.io/$BACKEND2_IMAGE:$TAG ./backend/get-task
+          docker push $REGISTRY_NAME.azurecr.io/$BACKEND2_IMAGE:$TAG

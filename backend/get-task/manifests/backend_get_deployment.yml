@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-get-ai
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: backend-get-ai
+  template:
+    metadata:
+      labels:
+        app: backend-get-ai
+    spec:
+      containers:
+        - name: backend-get-ai
+          image: devacrai11.azurecr.io/backend_get:553d6ff931a9d9dcceba03301905379e6e65132f
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5000

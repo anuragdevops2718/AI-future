@@ -9,13 +9,23 @@ import os
 app = Flask(__name__)
 CORS(app)
 
-# ensure data dir exists BEFORE creating engine (important!)
-DB_PATH = os.environ.get("TASKS_DB", "/data/tasks.db")
-os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
+# 🔹 READ DB CONNECTION STRING FROM ENV (K8s secret se aayega)
+DB_CONN_STRING = os.environ.get("DB_CONN_STRING")
 
-engine = create_engine(f"sqlite:///{DB_PATH}", connect_args={"check_same_thread": False})
+if not DB_CONN_STRING:
+    # Pod crash karega, taaki turant pakad mein aa jaaye ki env var nahi mila
+    raise RuntimeError("DB_CONN_STRING env var not set")
+
+# 🔹 pyodbc dialect use kar rahe hain (mssql+pyodbc)
+engine = create_engine(
+    DB_CONN_STRING,
+    pool_pre_ping=True,
+    echo=False,
+)
+
 Base = declarative_base()
 SessionLocal = sessionmaker(bind=engine)
+
 
 class Task(Base):
     __tablename__ = "tasks"
@@ -24,26 +34,37 @@ class Task(Base):
     description = Column(Text, nullable=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
-# create table if missing
+
+# table create if not exists
 Base.metadata.create_all(engine)
+
 
 @app.route("/health", methods=["GET"])
 def health():
-    return jsonify({"status": "healthy", "service": os.environ.get('SERVICE_NAME', 'tasks')}), 200
+    return jsonify({
+        "status": "healthy",
+        "service": os.environ.get('SERVICE_NAME', 'tasks')
+    }), 200
+
 
 @app.route("/tasks", methods=["GET"])
 def get_tasks():
     db = SessionLocal()
     try:
         tasks = db.query(Task).order_by(Task.created_at.desc()).all()
-        result = [{"id": t.id,
-                   "title": t.title,
-                   "description": t.description,
-                   "created_at": t.created_at.isoformat() if t.created_at else None}
-                  for t in tasks]
+        result = [
+            {
+                "id": t.id,
+                "title": t.title,
+                "description": t.description,
+                "created_at": t.created_at.isoformat() if t.created_at else None
+            }
+            for t in tasks
+        ]
         return jsonify({"success": True, "tasks": result, "count": len(result)}), 200
     finally:
         db.close()
+
 
 @app.route("/tasks", methods=["POST"])
 def add_task():
@@ -52,6 +73,7 @@ def add_task():
     description = payload.get("description")
     if not title:
         return jsonify({"success": False, "error": "title required"}), 400
+
     db = SessionLocal()
     try:
         t = Task(title=title, description=description)
@@ -61,6 +83,7 @@ def add_task():
         return jsonify({"success": True, "task": {"id": t.id, "title": t.title}}), 201
     finally:
         db.close()
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)), debug=False)

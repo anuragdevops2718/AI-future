@@ -1,6 +1,6 @@
 data "azurerm_key_vault" "azurekv" {
-  name                = "devkev0711"
-  resource_group_name = "demorg3110"
+  name                = "devkev1911"
+  resource_group_name = "demorg1911"
 }
 
 data "azurerm_key_vault_secret" "secret01" {

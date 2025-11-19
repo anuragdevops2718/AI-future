@@ -1,8 +1,8 @@
 rg_config = {
   rg1 = {
     name     = "devrgai11"
-    location = "brazilsouth"
-    tags     = { env = "dev", owner = "anurag" }
+    location = "westus"
+    tags     = { env = "dev" }
   }
 }
 
@@ -12,7 +12,7 @@ acr_config = {
     sku                 = "Standard"
     admin_enabled       = false
     resource_group_name = "devrgai11"
-    location            = "brazilsouth"
+    location            = "westus"
     tags                = { env = "dev" }
   }
 }
@@ -20,12 +20,12 @@ acr_config = {
 aks_config = {
   dev = {
     name                = "devaksai11"
-    location            = "brazilsouth"
+    location            = "westus"
     resource_group_name = "devrgai11"
     dns_prefix          = "aksai"
     admin_username      = "azureuser"
     node_count          = 2
-    vm_size             = "Standard_L2aos_v4"
+    vm_size             = "Standard_B2ms"
     network_plugin      = "azure"
     load_balancer_sku   = "standard"
     tags = { env = "dev" }
@@ -36,7 +36,7 @@ mssql_config = {
   sql1 = {
     servername = "aifuturesqlserver1411"
     resource_group_name = "devrgai11"
-    location = "brazilsouth"
+    location = "westus"
     dbname = "aifuturesqldb1411"
     tags = {
       "env" = "dev"

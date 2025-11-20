@@ -1,6 +1,6 @@
 rg_config = {
   rg1 = {
-    name     = "devrgai11"
+    name     = "devrgai20"
     location = "westus"
     tags     = { env = "dev" }
   }
@@ -11,7 +11,7 @@ acr_config = {
     name                = "devacrai11"
     sku                 = "Standard"
     admin_enabled       = false
-    resource_group_name = "devrgai11"
+    resource_group_name = "devrgai20"
     location            = "westus"
     tags                = { env = "dev" }
   }
@@ -21,7 +21,7 @@ aks_config = {
   dev = {
     name                = "devaksai11"
     location            = "westus"
-    resource_group_name = "devrgai11"
+    resource_group_name = "devrgai20"
     dns_prefix          = "aksai"
     admin_username      = "azureuser"
     node_count          = 2
@@ -35,7 +35,7 @@ aks_config = {
 mssql_config = {
   sql1 = {
     servername = "aifuturesqlserver1411"
-    resource_group_name = "devrgai11"
+    resource_group_name = "devrgai20"
     location = "westus"
     dbname = "aifuturesqldb1411"
     tags = {

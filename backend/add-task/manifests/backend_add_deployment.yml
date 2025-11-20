@@ -17,4 +17,10 @@ spec:
           image: devacrai11.azurecr.io/backend_add:e7ae8fc86ebe4bc51933a5e9184d5fae401fef96
           imagePullPolicy: Always
           ports:
-            - containerPort: 5000
+            - containerPort: 5001
+          envFrom:
+            - secretRef:
+                name: sql-connection-secret
+          env:
+            - name: SERVICE_NAME
+              value: "tasks"

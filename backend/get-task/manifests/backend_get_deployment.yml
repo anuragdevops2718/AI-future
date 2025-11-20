@@ -14,10 +14,10 @@ spec:
     spec:
       containers:
         - name: backend-get-ai
-          image: devacrai11.azurecr.io/backend_get:c986b7dde233fefd8a623e56dd986c55c143d9f0
+          image: devacrai11.azurecr.io/backend_get:c9993344ad04835851b9fe5d1d64c27953eda06f
           imagePullPolicy: Always
           ports: 
-            - containerPort: 5000
+            - containerPort: 500
           envFrom:
             - secretRef:
                 name: sql-connection-secret

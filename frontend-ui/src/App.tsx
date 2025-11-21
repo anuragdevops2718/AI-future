@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Sparkles, Zap, Eye, Layers, ChevronRight, Play, Shield, Gauge } from 'lucide-react';
 
 // 🔹 Backend base URLs (Vite env se aayenge, warna local fallback)
@@ -23,6 +23,13 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [adding, setAdding] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  // 🔹 “Get Started” modal ke liye state
+  const [showGetStarted, setShowGetStarted] = useState(false);
+
+  // 🔹 Scroll targets
+  const taskPanelRef = useRef<HTMLDivElement | null>(null);
+  const examplesRef = useRef<HTMLDivElement | null>(null);
 
   const features = [
     {
@@ -100,6 +107,31 @@ function App() {
     }
   };
 
+  // 🔹 Buttons ke actions
+  const handleLaunchDemo = () => {
+    // Tasks panel tak smooth scroll
+    taskPanelRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  const handleViewExamples = () => {
+    // Neeche examples section tak scroll
+    examplesRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  const handleOpenGetStarted = () => {
+    setShowGetStarted(true);
+  };
+
+  const handleCloseGetStarted = () => {
+    setShowGetStarted(false);
+  };
+
+  const handleGetStartedSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Yahan baad me real signup / login laga sakte ho
+    setShowGetStarted(false);
+  };
+
   useEffect(() => {
     fetchTasks();
   }, []);
@@ -124,13 +156,22 @@ function App() {
               </div>
             </div>
             <div className="flex items-center gap-4">
-              <button className="px-4 py-2 text-sm text-slate-300 hover:text-white transition-colors">
+              <button
+                className="px-4 py-2 text-sm text-slate-300 hover:text-white transition-colors"
+                onClick={handleViewExamples}
+              >
                 Documentation
               </button>
-              <button className="px-4 py-2 text-sm text-slate-300 hover:text-white transition-colors">
+              <button
+                className="px-4 py-2 text-sm text-slate-300 hover:text-white transition-colors"
+                onClick={handleViewExamples}
+              >
                 Pricing
               </button>
-              <button className="px-5 py-2.5 rounded-lg bg-gradient-to-r from-cyan-500 to-violet-600 hover:from-cyan-400 hover:to-violet-500 text-white text-sm font-semibold transition-all shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40">
+              <button
+                className="px-5 py-2.5 rounded-lg bg-gradient-to-r from-cyan-500 to-violet-600 hover:from-cyan-400 hover:to-violet-500 text-white text-sm font-semibold transition-all shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40"
+                onClick={handleOpenGetStarted}
+              >
                 Get Started
               </button>
             </div>
@@ -156,12 +197,20 @@ function App() {
                   real-time object recognition, and seamless spatial computing.
                 </p>
                 <div className="flex items-center gap-4 mb-10">
-                  <button className="group px-8 py-4 rounded-xl bg-gradient-to-r from-cyan-500 to-violet-600 hover:from-cyan-400 hover:to-violet-500 text-white font-semibold transition-all shadow-2xl shadow-cyan-500/30 hover:shadow-cyan-500/50 flex items-center gap-2">
+                  <button
+                    className="group px-8 py-4 rounded-xl bg-gradient-to-r from-cyan-500 to-violet-600 hover:from-cyan-400 hover:to-violet-500 text-white font-semibold transition-all shadow-2xl shadow-cyan-500/30 hover:shadow-cyan-500/50 flex items-center gap-2"
+                    onClick={handleLaunchDemo}
+                    type="button"
+                  >
                     <Play className="w-5 h-5" />
                     Launch Demo
                     <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                   </button>
-                  <button className="px-8 py-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white font-semibold transition-all">
+                  <button
+                    className="px-8 py-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white font-semibold transition-all"
+                    onClick={handleViewExamples}
+                    type="button"
+                  >
                     View Examples
                   </button>
                 </div>
@@ -179,12 +228,16 @@ function App() {
                 </div>
 
                 {/* 🔹 Tasks demo panel (connected to backend) */}
-                <div className="mt-4 bg-slate-900/60 border border-cyan-500/30 rounded-2xl p-5">
+                <div
+                  ref={taskPanelRef}
+                  className="mt-4 bg-slate-900/60 border border-cyan-500/30 rounded-2xl p-5"
+                >
                   <div className="flex items-center justify-between mb-3">
                     <div>
                       <h3 className="text-lg font-semibold">AI Future Tasks (Demo)</h3>
                       <p className="text-xs text-slate-400">
-                        Backed by Azure SQL · GET: <code className="text-cyan-300">{GET_API_BASE}</code>{' '}
+                        Backed by Azure SQL · GET:{' '}
+                        <code className="text-cyan-300">{GET_API_BASE}</code>{' '}
                         · ADD: <code className="text-cyan-300">{ADD_API_BASE}</code>
                       </p>
                     </div>
@@ -259,6 +312,7 @@ function App() {
                               ? 'bg-gradient-to-r ' + feature.color + ' shadow-lg'
                               : 'bg-white/5 hover:bg-white/10'
                           }`}
+                          type="button"
                         >
                           <div className="flex items-center gap-3">
                             <div
@@ -288,7 +342,8 @@ function App() {
             </div>
           </section>
 
-          <section className="max-w-7xl mx-auto px-6 py-16">
+          {/* Examples section */}
+          <section ref={examplesRef} className="max-w-7xl mx-auto px-6 py-16">
             <div className="text-center mb-12">
               <h3 className="text-4xl font-bold mb-4">Powered by Advanced Technology</h3>
               <p className="text-xl text-slate-400">Industry-leading AR and AI capabilities</p>
@@ -349,6 +404,61 @@ function App() {
             </div>
           </div>
         </footer>
+
+        {/* 🔹 Get Started Modal */}
+        {showGetStarted && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+            <div className="w-full max-w-md bg-slate-900 border border-cyan-500/40 rounded-2xl p-6 shadow-2xl">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-xl font-semibold">Get Started with Anurag AIOps</h3>
+                <button
+                  onClick={handleCloseGetStarted}
+                  className="text-slate-400 hover:text-white text-xl leading-none"
+                  type="button"
+                >
+                  ×
+                </button>
+              </div>
+              <p className="text-sm text-slate-400 mb-4">
+                Enter your details and we&apos;ll get back to you with a personalized AR demo.
+              </p>
+              <form onSubmit={handleGetStartedSubmit} className="space-y-3">
+                <input
+                  type="text"
+                  className="w-full rounded-lg border border-slate-700 bg-slate-950/70 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-cyan-500"
+                  placeholder="Your name"
+                  required
+                />
+                <input
+                  type="email"
+                  className="w-full rounded-lg border border-slate-700 bg-slate-950/70 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-cyan-500"
+                  placeholder="Work email"
+                  required
+                />
+                <textarea
+                  className="w-full rounded-lg border border-slate-700 bg-slate-950/70 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-cyan-500"
+                  placeholder="What kind of AR use case are you exploring?"
+                  rows={3}
+                />
+                <div className="flex justify-end gap-2 pt-2">
+                  <button
+                    type="button"
+                    onClick={handleCloseGetStarted}
+                    className="px-4 py-2 text-sm rounded-lg border border-slate-600 text-slate-300 hover:bg-slate-800"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="px-5 py-2 text-sm rounded-lg bg-gradient-to-r from-cyan-500 to-violet-600 text-white font-semibold hover:from-cyan-400 hover:to-violet-500"
+                  >
+                    Request Demo
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

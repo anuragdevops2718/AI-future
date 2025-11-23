@@ -39,7 +39,7 @@ mssql_config = {
     location = "westus"
     dbname = "aifuturesqldb1411"
     tags = {
-      ""env"" = "dev"
+      "env" = "dev"
     }
   }
 }

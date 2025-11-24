@@ -71,8 +71,6 @@ variable "kv_config" {
     purge_protection_enabled    = optional(bool, false)
     sku_name                    = string
     access_policy = optional(map(object({
-      tenant_id           = string
-      object_id           = string
       key_permissions     = optional(list(string))
       secret_permissions  = optional(list(string))
       storage_permissions = optional(list(string))

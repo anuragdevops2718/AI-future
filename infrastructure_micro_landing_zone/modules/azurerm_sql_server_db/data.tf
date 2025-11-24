@@ -1,15 +1,14 @@
-data "azurerm_key_vault" "azurekv" {
-  name                = "devkev1911"
-  resource_group_name = "demorg1911"
+data "azurerm_key_vault" "demokv" {
+    name = "devkvaifuture"
+    resource_group_name = "devrgaifuture"
 }
 
 data "azurerm_key_vault_secret" "secret01" {
-  name         = "sqlservername"
-  key_vault_id = data.azurerm_key_vault.azurekv.id
+  name         = "devsecret01"
+  key_vault_id = data.azurerm_key_vault.demokv.id
 }
 
 data "azurerm_key_vault_secret" "secret02" {
-  name         = "sqlserverpswd"
-  key_vault_id = data.azurerm_key_vault.azurekv.id
+  name         = "devsecret02"
+  key_vault_id = data.azurerm_key_vault.demokv.id
 }
-

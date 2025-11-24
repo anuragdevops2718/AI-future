@@ -8,7 +8,7 @@ rg_config = {
 
 acr_config = {
   acr1 = {
-    name                = "devacrai"
+    name                = "devacraifuture"
     sku                 = "Standard"
     admin_enabled       = false
     resource_group_name = "devrgaifuture"
@@ -19,7 +19,7 @@ acr_config = {
 
 aks_config = {
   dev = {
-    name                = "devaksai"
+    name                = "devaksaifuture"
     location            = "westus"
     resource_group_name = "devrgaifuture"
     dns_prefix          = "aksai"
@@ -28,19 +28,55 @@ aks_config = {
     vm_size             = "Standard_B2ms"
     network_plugin      = "azure"
     load_balancer_sku   = "standard"
-    tags = { "env" = "dev" }
+    tags                = { "env" = "dev" }
   }
 }
 
 mssql_config = {
   sql1 = {
-    servername = "aifuturesqlserver1411"
+    servername          = "devsqlserveraifuture"
     resource_group_name = "devrgaifuture"
-    location = "westus"
-    dbname = "aifuturesqldb1411"
+    location            = "westus"
+    dbname              = "devsqldbaifuture"
     tags = {
       "env" = "dev"
     }
   }
 }
 
+kv_config = {
+  "kv1" = {
+    name                = "devkvaifuture"
+    location            = "westus"
+    resource_group_name = "devrgaifuture"
+    sku_name            = "standard"
+    access_policy = {
+      "pol1" = {
+        key_permissions     = "Get"
+        secret_permissions  = "Get"
+        storage_permissions = "Get"
+      }
+    }
+    tags = {
+      "env" = "dev"
+    }
+  }
+}
+
+kvsec_config = {
+  "sec1" = {
+    name  = "devsecret01"
+    value = "adminuser"
+    tags = {
+      "env" = "dev"
+    }
+  }
+  
+  "sec2" = {
+    name  = "devsecret02"
+    value = "Pamanu2friends)"
+    tags = {
+      "env" = "dev"
+    }
+  }
+}

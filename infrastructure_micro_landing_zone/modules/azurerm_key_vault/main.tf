@@ -11,7 +11,7 @@ resource "azurerm_key_vault" "example" {
   sku_name = each.value.sku_name
 
   dynamic "access_policy" {
-    for_each = lookup(tomap(each.value), each.value.access_policy, {})
+    for_each = each.value.access_policy != null ? each.value.access_policy : {}
     content {
       tenant_id = data.azurerm_client_config.devclient.tenant_id
       object_id = data.azurerm_client_config.devclient.object_id

@@ -67,7 +67,6 @@ variable "kv_config" {
     location                    = string
     resource_group_name         = string
     enabled_for_disk_encryption = optional(bool, true)
-    tenant_id                   = string
     soft_delete_retention_days  = optional(number, 7)
     purge_protection_enabled    = optional(bool, false)
     sku_name                    = string
@@ -86,7 +85,6 @@ variable "kvsec_config" {
   type = map(object({
     name         = string
     value        = optional(string)
-    key_vault_id = string
     tags = optional(map(string))
   }))
 }

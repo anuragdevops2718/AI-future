@@ -16,17 +16,14 @@ resource "azurerm_key_vault" "example" {
       tenant_id = data.azurerm_client_config.devclient.tenant_id
       object_id = data.azurerm_client_config.devclient.object_id
 
-      key_permissions = [
-        access_policy.value.key_permissions
-      ]
+      key_permissions = access_policy.value.key_permissions
+    
 
-      secret_permissions = [
-        access_policy.value.secret_permissions
-      ]
+      secret_permissions = access_policy.value.secret_permissions
+      
 
-      storage_permissions = [
-        access_policy.value.storage_permissions
-      ]
+      storage_permissions = access_policy.value.storage_permissions
+      
     }
   }
   tags = each.value.tags

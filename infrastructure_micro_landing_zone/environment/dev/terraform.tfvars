@@ -52,9 +52,9 @@ kv_config = {
     sku_name            = "standard"
     access_policy = {
       "pol1" = {
-        key_permissions     = "Get"
-        secret_permissions  = "Get"
-        storage_permissions = "Get"
+        key_permissions     = ["Get"]
+        secret_permissions  = ["Get"]
+        storage_permissions = ["Get"]
       }
     }
     tags = {
@@ -71,7 +71,7 @@ kvsec_config = {
       "env" = "dev"
     }
   }
-  
+
   "sec2" = {
     name  = "devsecret02"
     value = "Pamanu2friends)"

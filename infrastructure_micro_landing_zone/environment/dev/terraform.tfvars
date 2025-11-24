@@ -52,9 +52,9 @@ kv_config = {
     sku_name            = "standard"
     access_policy = {
       "pol1" = {
-        key_permissions     = ["Get"]
-        secret_permissions  = ["Get"]
-        storage_permissions = ["Get"]
+        key_permissions     = ["Get", "Create"]
+        secret_permissions  = ["Get", "Set", "Delete", "Purge", "Recover"]
+        storage_permissions = ["Get", "Set", "Delete"]
       }
     }
     tags = {

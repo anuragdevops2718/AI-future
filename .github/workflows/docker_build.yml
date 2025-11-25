@@ -65,6 +65,6 @@ jobs:
             # ---------- UPDATE MANIFEST TAGS ----------
       - name: Update image tags in manifests
         run: |
-          sed -i "s|\(image: $REGISTRY_NAME.azurecr.io/frontend:\).*|\1$TAG|g" NEURALIXIQ/frontend/manifests/ui-deployment.yml
+          sed -i "s|\(image: $REGISTRY_NAME.azurecr.io/frontend:\).*|\1$TAG|g" NEURALIXIQ/frontend/manifests/ui_deployment.yml
           sed -i "s|\(image: $REGISTRY_NAME.azurecr.io/backend_add:\).*|\1$TAG|g" NEURALIXIQ/backend/add-task/manifests/backend_add_deployment.yml
           sed -i "s|\(image: $REGISTRY_NAME.azurecr.io/backend_get:\).*|\1$TAG|g" NEURALIXQ/backend/get-task/maifests/backend_get_deployment.yml

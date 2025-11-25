@@ -45,7 +45,7 @@ jobs:
           docker build \
             --build-arg VITE_GET_API_BASE_URL=$GET_API_BASE_URL \
             --build-arg VITE_ADD_API_BASE_URL=$ADD_API_BASE_URL \
-            -t $REGISTRY_NAME.azurecr.io/$FRONTEND_IMAGE:$TAG ./frontend-ui
+            -t $REGISTRY_NAME.azurecr.io/$FRONTEND_IMAGE:$TAG ./frontend
 
           docker push $REGISTRY_NAME.azurecr.io/$FRONTEND_IMAGE:$TAG
 

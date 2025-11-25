@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-get-ai
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: backend-get-ai
+  template:
+    metadata:
+      labels:
+        app: backend-get-ai
+    spec:
+      containers:
+        - name: backend-get-ai
+          image: devacrai11.azurecr.io/backend_get:5154729d9a783f8ab44705a88885de9bb88a24f3
+          imagePullPolicy: Always
+          ports: 
+            - containerPort: 5000
+          envFrom:
+            - secretRef:
+                name: sql-connection-secret
+          env:
+            - name: SERVICE_NAME
+              value: "tasks"

@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: backend-add-ai
-          image: devacraifuture.azurecr.io/backend_add:eeb6187c70643aa09ca754ec3b6695fcc8338be3
+          image: devacraifuture.azurecr.io/backend_add:9d8e1ee9cff2301ea3603270f73f5ccf80cc6439
           imagePullPolicy: Always
           ports:
             - containerPort: 5001

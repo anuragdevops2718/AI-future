@@ -3,9 +3,9 @@ import { Sparkles, Zap, Eye, Layers, ChevronRight, Play, Shield, Gauge } from 'l
 
 // 🔹 Backend base URLs (Vite env se aayenge, warna local fallback)
 const GET_API_BASE =
-  import.meta.env.VITE_GET_API_BASE_URL || 'http://localhost:5001';
+  import.meta.env.VITE_GET_API_BASE_URL || 'http://neuralixget.apforge.info';
 const ADD_API_BASE =
-  import.meta.env.VITE_ADD_API_BASE_URL || 'http://localhost:5002';
+  import.meta.env.VITE_ADD_API_BASE_URL || 'http://neuralixadd.apforge.info';
 
 type Task = {
   id: number;

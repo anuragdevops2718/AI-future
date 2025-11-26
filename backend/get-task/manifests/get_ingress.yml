@@ -3,9 +3,9 @@ kind: Ingress
 metadata:
   name: backend-get-ingress
   annotations:
-    kubernetes.io/ingress.class: "azure/application-gateway"
+    kubernetes.io/ingress.class: "azure-application-gateway"
 spec:
-  ingressClassName: "azure/application-gateway"
+  ingressClassName: "azure-application-gateway"
   rules:
     - host: neuralixget.apforge.info   # replace with your get-task FQDN
       http:

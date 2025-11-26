@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: backend-get-ai
-          image: devacraifuture.azurecr.io/backend_get:e1ed44b190871e270f93567bb91fc116d0a6aab3
+          image: devacraifuture.azurecr.io/backend_get:8fe2166a2c919407758c68a86b5000746227062d
           imagePullPolicy: Always
           ports: 
             - containerPort: 5000

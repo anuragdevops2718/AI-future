@@ -67,4 +67,4 @@ jobs:
         run: |
           sed -i "s|\(image: $REGISTRY_NAME.azurecr.io/frontend:\).*|\1$TAG|g" frontend/manifests/ui_development.yml
           sed -i "s|\(image: $REGISTRY_NAME.azurecr.io/backend_add:\).*|\1$TAG|g" backend/add-task/manifests/backend_add_deployment.yml
-          sed -i "s|\(image: $REGISTRY_NAME.azurecr.io/backend_get:\).*|\1$TAG|g" backend/get-task/maifests/backend_get_deployment.yml
+          sed -i "s|\(image: $REGISTRY_NAME.azurecr.io/backend_get:\).*|\1$TAG|g" backend/get-task/manifests/backend_get_deployment.yml

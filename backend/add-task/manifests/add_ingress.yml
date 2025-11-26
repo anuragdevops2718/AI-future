@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: backend-add-ingress
+  annotations:
+    kubernetes.io/ingress.class: "azure/application-gateway"
+spec:
+  ingressClassName: "azure/application-gateway"
+  rules:
+    - host: neuralixadd.apforge.info   # replace with your add-task FQDN
+      http:
+        paths:
+          - path: /tasks
+            pathType: Prefix
+            backend:
+              service:
+                name: backend-add-svc-ai
+                port:
+                  number: 9020

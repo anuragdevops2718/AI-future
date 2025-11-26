@@ -65,16 +65,10 @@ jobs:
       - name: Update image tags in manifests
         run: |
           set -x
-
-    # FRONTEND
-          sed -i "s|image:[[:space:]]*${REGISTRY_NAME}.azurecr.io/frontend:.*|image: ${REGISTRY_NAME}.azurecr.io/frontend:${TAG}|g" frontend/manifests/ui_development.yml
-
-    # BACKEND ADD
-          sed -i "s|image:[[:space:]]*${REGISTRY_NAME}.azurecr.io/backend_add:.*|image: ${REGISTRY_NAME}.azurecr.io/backend_add:${TAG}|g" backend/add-task/manifests/backend_add_deployment.yml
-
-    # BACKEND GET
-          sed -i "s|image:[[:space:]]*${REGISTRY_NAME}.azurecr.io/backend_get:.*|image: ${REGISTRY_NAME}.azurecr.io/backend_get:${TAG}|g" backend/get-task/manifests/backend_get_deployment.yml
-   
+          sed -i "s|image: ${REGISTRY_NAME}.azurecr.io/frontend:.*|image: ${REGISTRY_NAME}.azurecr.io/frontend:${TAG}|g" frontend/manifests/ui_development.yml
+          sed -i "s|image: ${REGISTRY_NAME}.azurecr.io/backend_add:.*|image: ${REGISTRY_NAME}.azurecr.io/backend_add:${TAG}|g" backend/add-task/manifests/backend_add_deployment.yml
+          sed -i "s|image: ${REGISTRY_NAME}.azurecr.io/backend_get:.*|image: ${REGISTRY_NAME}.azurecr.io/backend_get:${TAG}|g" backend/get-task/manifests/backend_get_deployment.yml
+  
         
       - name: Commit changes
         run: |
@@ -83,6 +77,6 @@ jobs:
           git add .
           git commit -m "Update image tag to $TAG [skip ci]" || echo "No changes to commit"
 
-     - name: Push changes
-       run: |
+      - name: Push changes
+        run: |
           git push

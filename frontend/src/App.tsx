@@ -399,6 +399,11 @@ function App() {
                 <span className="font-semibold">Anurag AIOps</span>
               </div>
               <p className="text-sm text-slate-400">
+                Backed by Azure SQL – GET:&nbsp;
+                <span className="text-cyan-400">http://neuralixget.apforge.info</span>
+                &nbsp;– ADD:&nbsp;
+                <span className="text-cyan-400">http://neuralixadd.apforge.info</span>
+              </p>
                 © 2025 Anurag AIOps. All rights reserved.
               </p>
             </div>

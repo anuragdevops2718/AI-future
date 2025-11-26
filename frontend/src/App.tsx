@@ -7,6 +7,9 @@ const GET_API_BASE =
 const ADD_API_BASE =
   import.meta.env.VITE_ADD_API_BASE_URL || 'http://neuralixadd.apforge.info';
 
+console.log('GET_API_BASE =', GET_API_BASE);
+console.log('ADD_API_BASE =', ADD_API_BASE);
+
 type Task = {
   id: number;
   title: string;
@@ -399,12 +402,12 @@ function App() {
                 <span className="font-semibold">Anurag AIOps</span>
               </div>
               <p className="text-sm text-slate-400">
-                Backed by Azure SQL – GET:&nbsp;
-                <span className="text-cyan-400">http://neuralixget.apforge.info</span>
-                &nbsp;– ADD:&nbsp;
-                <span className="text-cyan-400">http://neuralixadd.apforge.info</span>
-              </p>
                 © 2025 Anurag AIOps. All rights reserved.
+                <br />
+                Backed by Azure SQL – GET:&nbsp;
+                <span className="text-cyan-400">{GET_API_BASE}</span>
+                &nbsp;– ADD:&nbsp;
+                <span className="text-cyan-400">{ADD_API_BASE}</span>
               </p>
             </div>
           </div>

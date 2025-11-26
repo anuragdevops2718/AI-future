@@ -5,7 +5,7 @@ metadata:
 spec:
   ingressClassName: "azure-application-gateway"
   rules:
-    - host: neuralixui.apforge.info  # replace with your frontend FQDN
+    - host: neuralix.apforge.info  # replace with your frontend FQDN
       http:
         paths:
           - path: /

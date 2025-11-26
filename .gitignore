@@ -22,3 +22,4 @@ dist-ssr
 *.sw?
 .env
 .terraform
+#My name is AP

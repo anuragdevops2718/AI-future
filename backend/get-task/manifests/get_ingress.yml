@@ -2,6 +2,10 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: backend-get-ingress
+  annotations:
+    kubernetes.io/ingress.class: "azure-application-gateway"
+    appgw.ingress.kubernetes.io/health-probe-path: "/health"
+    appgw.ingress.kubernetes.io/health-probe-status-codes: "200-399"
 spec:
   ingressClassName: "azure-application-gateway"
   rules:

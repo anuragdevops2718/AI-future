@@ -21,3 +21,11 @@ spec:
                 name: backend-get-svc-ai
                 port:
                   number: 9030
+          - path: /tasks
+            pathType: Prefix
+            backend:
+              service:
+                name: backend-get-svc-ai
+                port:
+                  number: 9030
+          

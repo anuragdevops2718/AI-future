@@ -9,14 +9,12 @@ import os
 app = Flask(__name__)
 CORS(app)
 
-# 🔹 READ DB CONNECTION STRING FROM ENV (K8s secret se aayega)
+# 🔹 READ DB CONNECTION STRING FROM ENV
 DB_CONN_STRING = os.environ.get("DB_CONN_STRING")
 
 if not DB_CONN_STRING:
-    # Pod crash karega, taaki turant pakad mein aa jaaye ki env var nahi mila
     raise RuntimeError("DB_CONN_STRING env var not set")
 
-# 🔹 pyodbc dialect use kar rahe hain (mssql+pyodbc)
 engine = create_engine(
     DB_CONN_STRING,
     pool_pre_ping=True,
@@ -35,19 +33,22 @@ class Task(Base):
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
 
-# table create if not exists
 Base.metadata.create_all(engine)
 
 
+# 🔹 HEALTH (frontend + AGIC ke liye)
 @app.route("/health", methods=["GET"])
+@app.route("/api/get/health", methods=["GET"])  # 👈 NEW
 def health():
     return jsonify({
         "status": "healthy",
-        "service": os.environ.get('SERVICE_NAME', 'tasks')
+        "service": os.environ.get('SERVICE_NAME', 'tasks-get')
     }), 200
 
 
+# 🔹 GET TASKS
 @app.route("/tasks", methods=["GET"])
+@app.route("/api/get/tasks", methods=["GET"])  # 👈 NEW
 def get_tasks():
     db = SessionLocal()
     try:
@@ -66,23 +67,7 @@ def get_tasks():
         db.close()
 
 
-@app.route("/tasks", methods=["POST"])
-def add_task():
-    payload = request.get_json() or {}
-    title = payload.get("title")
-    description = payload.get("description")
-    if not title:
-        return jsonify({"success": False, "error": "title required"}), 400
-
-    db = SessionLocal()
-    try:
-        t = Task(title=title, description=description)
-        db.add(t)
-        db.commit()
-        db.refresh(t)
-        return jsonify({"success": True, "task": {"id": t.id, "title": t.title}}), 201
-    finally:
-        db.close()
+# 🔹 POST BLOCK WALA YAHAN SE HATA DIYA GA — GET service me ADD nahi aana chahiye
 
 
 if __name__ == "__main__":

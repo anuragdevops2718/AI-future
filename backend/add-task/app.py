@@ -13,10 +13,8 @@ CORS(app)
 DB_CONN_STRING = os.environ.get("DB_CONN_STRING")
 
 if not DB_CONN_STRING:
-    # Agar env var nahi milega toh pod crash karega -> turant pata chal jayega
     raise RuntimeError("DB_CONN_STRING env var not set")
 
-# 🔹 SQLAlchemy engine (mssql+pyodbc with ODBC Driver 18 in conn string)
 engine = create_engine(
     DB_CONN_STRING,
     pool_pre_ping=True,
@@ -35,11 +33,12 @@ class Task(Base):
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
 
-# DB me table nahi hai toh create ho jayega
 Base.metadata.create_all(engine)
 
 
+# 🔹 HEALTH CHECK (two routes for AGIC + local test)
 @app.route("/health", methods=["GET"])
+@app.route("/api/add/health", methods=["GET"])   # 👈 NEW
 def health():
     return jsonify({
         "status": "healthy",
@@ -47,8 +46,9 @@ def health():
     }), 200
 
 
-# OPTIONAL: agar sirf POST wala microservice chahiye toh isko comment bhi kar sakta hai
+# 🔹 GET TASKS (optional, but keeps things consistent)
 @app.route("/tasks", methods=["GET"])
+@app.route("/api/add/tasks", methods=["GET"])   # 👈 NEW
 def get_tasks():
     db = SessionLocal()
     try:
@@ -67,7 +67,9 @@ def get_tasks():
         db.close()
 
 
+# 🔹 ADD TASK (POST endpoint)
 @app.route("/tasks", methods=["POST"])
+@app.route("/api/add/tasks", methods=["POST"])   # 👈 NEW
 def add_task():
     payload = request.get_json() or {}
     title = payload.get("title")
@@ -97,6 +99,6 @@ def add_task():
 if __name__ == "__main__":
     app.run(
         host="0.0.0.0",
-        port=int(os.environ.get("PORT", 5001)),  # alag port rakh sakta hai agar chaahe
+        port=int(os.environ.get("PORT", 5001)),
         debug=False,
     )

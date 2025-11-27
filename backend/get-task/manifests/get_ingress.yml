@@ -12,7 +12,7 @@ metadata:
 spec:
   ingressClassName: "azure-application-gateway"
   rules:
-    - host: neuralixget.apforge.info
+    - host: neuralix.apforge.info
       http:
         paths:
           - path: /api/get

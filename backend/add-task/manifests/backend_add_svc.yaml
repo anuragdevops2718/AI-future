@@ -8,4 +8,4 @@ spec:
   ports:
     - port: 9020
       targetPort: 5001
-  type: ClusterIP
+  type: LoadBalancer

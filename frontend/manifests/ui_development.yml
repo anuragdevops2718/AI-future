@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: ai-frontend
-          image: devacraifuture.azurecr.io/frontend:e084f038204bbf65bd4c9768b596a3e839976ffa
+          image: devacraifuture.azurecr.io/frontend:be027087f1f927d0faf7aa19ef89250566410adc
           imagePullPolicy: Always
           ports:
             - containerPort: 80

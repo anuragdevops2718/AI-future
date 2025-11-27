@@ -21,8 +21,8 @@ jobs:
       BACKEND2_IMAGE: backend_get
       ARM_USE_OIDC: "true"
       TAG: ${{ github.sha }}
-      GET_API_BASE_URL: "http://neuralixget.apforge.info"
-      ADD_API_BASE_URL: "http://neuralixadd.apforge.info"
+      GET_API_BASE_URL: "http://neuralix.apforge.info/api/get"
+      ADD_API_BASE_URL: "http://neuralix.apforge.info/api/add"
 
     steps:
       - name: Checkout Repository

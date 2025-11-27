@@ -15,7 +15,7 @@ spec:
     - host: neuralixadd.apforge.info
       http:
         paths:
-          - path: /
+          - path: /api/add
             pathType: Prefix
             backend:
               service:

@@ -1,0 +1,32 @@
+apiVersion: v1
+data:
+  ADDON_MANAGED_BY: aks
+  ADDON_MODE: "true"
+  APPGW_ENABLE_DEPLOY: "true"
+  APPGW_NAME: ingress-appgateway
+  APPGW_SUBNET_NAME: ingress-appgateway-subnet
+  APPGW_SUBNET_PREFIX: 10.225.0.0/16
+  APPGW_VERBOSITY_LEVEL: "5"
+  AZURE_CLIENT_ID: a86a4c89-8a58-4617-810c-bf6502ffb54a
+  ENABLE_MULTI_SITE_INGRESS: "true"
+  HOSTED_ON_UNDERLAY: "true"
+  HTTP_SERVICE_PORT: "8123"
+  INGRESS_CLASS_RESOURCE_CONTROLLER: azure/application-gateway
+  INGRESS_CLASS_RESOURCE_DEFAULT: "false"
+  INGRESS_CLASS_RESOURCE_ENABLED: "true"
+  INGRESS_CLASS_RESOURCE_NAME: azure-application-gateway
+  USE_MANAGED_IDENTITY_FOR_POD: "true"
+  ENABLE_MULTI_SITE_INGRESS: "true"
+kind: ConfigMap
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","data":{"ADDON_MANAGED_BY":"aks","ADDON_MODE":"true","APPGW_ENABLE_DEPLOY":"true","APPGW_NAME":"ingress-appgateway","APPGW_SUBNET_NAME":"ingress-appgateway-subnet","APPGW_SUBNET_PREFIX":"10.225.0.0/16","APPGW_VERBOSITY_LEVEL":"5","AZURE_CLIENT_ID":"a86a4c89-8a58-4617-810c-bf6502ffb54a","HOSTED_ON_UNDERLAY":"true","HTTP_SERVICE_PORT":"8123","INGRESS_CLASS_RESOURCE_CONTROLLER":"azure/application-gateway","INGRESS_CLASS_RESOURCE_DEFAULT":"false","INGRESS_CLASS_RESOURCE_ENABLED":"true","INGRESS_CLASS_RESOURCE_NAME":"azure-application-gateway","USE_MANAGED_IDENTITY_FOR_POD":"true"},"kind":"ConfigMap","metadata":{"annotations":{},"labels":{"addonmanager.kubernetes.io/mode":"Reconcile","app":"ingress-appgw"},"name":"ingress-appgw-cm","namespace":"kube-system"}}
+  creationTimestamp: "2025-11-26T18:18:28Z"
+  labels:
+    addonmanager.kubernetes.io/mode: Reconcile
+    app: ingress-appgw
+  name: ingress-appgw-cm
+  namespace: kube-system
+  resourceVersion: "1002516"
+  uid: 36ab47fa-bd19-40b3-a0a0-211c2a7f79cb

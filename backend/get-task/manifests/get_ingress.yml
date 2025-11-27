@@ -8,7 +8,6 @@ metadata:
     appgw.ingress.kubernetes.io/health-probe-status-codes: "200-399"
     appgw.ingress.kubernetes.io/override-frontend-port: "80"
     appgw.ingress.kubernetes.io/ssl-redirect: "false"
-    appgw.ingress.kubernetes.io/backend-path-prefix: "/"
 spec:
   ingressClassName: "azure-application-gateway"
   rules:
@@ -22,11 +21,3 @@ spec:
                 name: backend-get-svc-ai
                 port:
                   number: 9030
-          - path: /tasks
-            pathType: Prefix
-            backend:
-              service:
-                name: backend-get-svc-ai
-                port:
-                  number: 9030
-          

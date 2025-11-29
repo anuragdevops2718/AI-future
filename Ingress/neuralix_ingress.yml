@@ -1,40 +1,21 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: neuralix-main-ingress
+  name: neuralixapp-ingress
   annotations:
-    kubernetes.io/ingress.class: azure-application-gateway
-    appgw.ingress.kubernetes.io/rewrite-target: /$2
+    kubernetes.io/ingress.class: "azure-application-gateway"
+    # HTTPS force nahi kar rahe abhi
+    appgw.ingress.kubernetes.io/ssl-redirect: "false"
 spec:
-  ingressClassName: azure-application-gateway
+  ingressClassName: "azure-application-gateway"
   rules:
-  - host: neuralixapp.apforge.info
-    http:
-      paths:
-
-      # Frontend → /
-      - path: /()(.*)
-        pathType: Prefix
-        backend:
-          service:
-            name: frontend-svc-ai
-            port:
-              number: 9000
-
-      # Backend GET → /api/get/*
-      - path: /api/get(/|$)(.*)
-        pathType: Prefix
-        backend:
-          service:
-            name: backend-get-svc-ai
-            port:
-              number: 9030
-
-      # Backend ADD → /api/add/*
-      - path: /api/add(/|$)(.*)
-        pathType: Prefix
-        backend:
-          service:
-            name: backend-add-svc-ai
-            port:
-              number: 9020
+    - host: neuralixapp.apforge.info
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: frontend-svc-ai
+                port:
+                  number: 9000
